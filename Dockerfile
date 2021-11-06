@@ -35,8 +35,6 @@ RUN wget -O - https://github.com/novnc/noVNC/archive/v${NOVNC_VERSION}.tar.gz | 
 
 EXPOSE 8080
 ENV RESOLUTION 1280x720x24
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY entrypoint.sh /entrypoint.sh
 
 ENV USER wine
 ENV HOME /home/${USER}
@@ -57,6 +55,8 @@ ENV WINE_STDOUT /dev/null
 # Fix stdout and stderr permissions
 RUN chmod 666 /dev/stdout && \
     chmod 666 /dev/stderr
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/bin/supervisord"]
