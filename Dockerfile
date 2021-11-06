@@ -51,6 +51,8 @@ WORKDIR ${HOME}
 ENV WINEPREFIX ${HOME}/prefix32
 
 ENV VNC_PASSWORD ""
+# In case of wine's verbose logs.
+ENV WINE_STDOUT /dev/null
 
 # Fix stdout and stderr permissions
 RUN chmod 666 /dev/stdout && \
